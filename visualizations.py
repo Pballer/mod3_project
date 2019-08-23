@@ -6,6 +6,7 @@ A framework for each type of visualization is provided.
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 
 # Set specific parameters for the visualizations
 large = 22; med = 16; small = 12
@@ -73,7 +74,7 @@ def boxplot_plot(package=None, input_vars=None, target_vars=None):
     pass
 
 
-def visualization_one(target_var = None, input_vars= None, output_image_name=None):
+def visualization_one(htest_dfs, output_image_name=None):
     """
     The visualization functions are what is used to create each individual image.
     The function should be repeatable if not generalizable
@@ -84,15 +85,14 @@ def visualization_one(target_var = None, input_vars= None, output_image_name=Non
     :param output_image_name: the desired name for the image saved
     :return: outputs a saved png file and returns a fig object for testing
     """
-    ###
-    # Main chunk of code here
-    ###
-
-    # Starter code for labeling the image
-    plt.xlabel(None, figure = fig)
-    plt.ylabel(None, figure = fig)
-    plt.title(None, figure= fig)
-    plt.legend()
+    
+    fig = plt.figure(figsize=(15,9))
+    sns.distplot(htest_dfs[0], label='Home Team')
+    sns.distplot(htest_dfs[1], label='Away Team')
+    plt.xlabel('Points Per Game', figure=fig)
+    plt.title('Home Team vs Away Team', figure=fig)
+    plt.ylabel('Frequency', figure=fig)
+    plt.legend();
 
     # exporting the image to the img folder
     plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
@@ -101,11 +101,37 @@ def visualization_one(target_var = None, input_vars= None, output_image_name=Non
 
 # please fully flesh out this function to meet same specifications of visualization one
 
-def visualization_two(output_image_name):
-    pass
+def visualization_two(comparison_groups, output_image_name):
+    
+    spreads = pd.DataFrame(comparison_groups).T
+    spreads.columns = ['Home', 'Away']
+    
+    fig = plt.figure(figsize=(5,10))
+    box_plot = sns.boxplot(x="Location", y="Points", data=pd.melt(spreads, value_name='Points', var_name='Location'), width=.5)
+    box_plot.set_title('Home vs Away Point Spread');
+    
+    plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
 
-def visualization_three(output_image_name):
-    pass
+def visualization_three(comparison_groups, output_image_name):
+    
+    fig = plt.figure(figsize=(15,9))
+    sns.distplot(comparison_groups[0], label='Bucks 2017')
+    sns.distplot(comparison_groups[1], label='Bucks 2018')
+    plt.title('Bucks Performance 2017 vs 2018 Season', figure=fig)
+    plt.xlabel('Points Scored', figure=fig)
+    plt.ylabel('Frequency', figure=fig)
+    plt.legend();
+    
+    plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
 
-def visualization_four(output_image_name):
-    pass
+def visualization_four(htest_dfs, output_image_name):
+    
+    fig = plt.figure(figsize=(15,9))
+    sns.distplot(htest_dfs[0], label='Home')
+    sns.distplot(htest_dfs[1], label='Away')
+    plt.legend()
+    plt.ylabel('Frequency', figure=fig)
+    plt.xlabel('Points Scored', figure=fig)
+    plt.title('Giannis Antetokounmpo Home vs Away Performance', figure=fig)
+    
+    plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
