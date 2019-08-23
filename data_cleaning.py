@@ -14,7 +14,8 @@ and return the partially cleaned bit of the dataset.
 import ast
 import pandas as pd
 
-
+# LINK TO DIRTY DATA
+# https://drive.google.com/file/d/1jiLLCraHpMt1yjr2gGlY9ufG86bGCd65/view?usp=sharing
 
 def convert_str_to_dict(nested_dict):
     """Convert json string representation of dictionary to a python dict."""
@@ -82,8 +83,9 @@ def full_clean():
     dirty_data = drop_unused_cols(dirty_data)
     dirty_data = dirty_data.dropna()
     dirty_data = derived_cols(dirty_data)
-    cleaned_data = remove_postseason(dirty_data)
+    dirty_data = remove_postseason(dirty_data)
+    dirty_data = dirty_data.drop_duplicates()
 
-    cleaned_data.to_csv('./data/cleaned_for_testing.csv')
+    dirty_data.to_pickle('./data/cleaned_for_testing.pkl')
 
-    return cleaned_data
+    return dirty_data
