@@ -19,3 +19,5 @@ Our goal is to advise our readers on how to efficiently place bets.  We review h
   - data_cleaning.py
   - visualizations.py
 - Hypothesis Visualizations: img/
+
+#### [Presentation Slides](https://docs.google.com/presentation/d/1oKwroV6cYicPTxXw25B3uJNaLBhLv9zOj0D0VlnQ-H0/edit?usp=sharing)
