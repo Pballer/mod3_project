@@ -2,6 +2,9 @@ import pandas as pd
 import pytest
 import re 
 
+# LINK TO DIRTY DATA
+# https://drive.google.com/file/d/1jiLLCraHpMt1yjr2gGlY9ufG86bGCd65/view?usp=sharing
+
 @pytest.mark.cleaning
 def test_if_dataframe(df):
     assert  pd.core.frame.DataFrame == type(df), 'The return of full_clean is not a DataFrame'
