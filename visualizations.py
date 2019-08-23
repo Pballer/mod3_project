@@ -85,7 +85,7 @@ def visualization_one(htest_dfs, output_image_name=None):
     :param output_image_name: the desired name for the image saved
     :return: outputs a saved png file and returns a fig object for testing
     """
-    
+
     fig = plt.figure(figsize=(15,9))
     sns.distplot(htest_dfs[0], label='Home Team')
     sns.distplot(htest_dfs[1], label='Away Team')
@@ -102,18 +102,19 @@ def visualization_one(htest_dfs, output_image_name=None):
 # please fully flesh out this function to meet same specifications of visualization one
 
 def visualization_two(comparison_groups, output_image_name):
-    
+
     spreads = pd.DataFrame(comparison_groups).T
     spreads.columns = ['Home', 'Away']
-    
+
     fig = plt.figure(figsize=(5,10))
     box_plot = sns.boxplot(x="Location", y="Points", data=pd.melt(spreads, value_name='Points', var_name='Location'), width=.5)
     box_plot.set_title('Home vs Away Point Spread');
-    
+
     plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
 
+
 def visualization_three(comparison_groups, output_image_name):
-    
+
     fig = plt.figure(figsize=(15,9))
     sns.distplot(comparison_groups[0], label='Bucks 2017')
     sns.distplot(comparison_groups[1], label='Bucks 2018')
@@ -121,11 +122,11 @@ def visualization_three(comparison_groups, output_image_name):
     plt.xlabel('Points Scored', figure=fig)
     plt.ylabel('Frequency', figure=fig)
     plt.legend();
-    
+
     plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
 
 def visualization_four(htest_dfs, output_image_name):
-    
+
     fig = plt.figure(figsize=(15,9))
     sns.distplot(htest_dfs[0], label='Home')
     sns.distplot(htest_dfs[1], label='Away')
@@ -133,5 +134,5 @@ def visualization_four(htest_dfs, output_image_name):
     plt.ylabel('Frequency', figure=fig)
     plt.xlabel('Points Scored', figure=fig)
     plt.title('Giannis Antetokounmpo Home vs Away Performance', figure=fig)
-    
+
     plt.savefig(f'img/{output_image_name}.png', transparent = True, figure = fig)
